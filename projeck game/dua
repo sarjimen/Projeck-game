@@ -1,0 +1,53 @@
+import pygame
+import sys
+
+# Inisialisasi Pygame
+pygame.init()
+
+# Ukuran layar
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Game Sederhana")
+
+# Warna
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+
+# FPS (frame per second)
+clock = pygame.time.Clock()
+FPS = 60
+
+# Pemain (sebagai persegi)
+player_size = 50
+player_x, player_y = WIDTH // 2, HEIGHT // 2
+player_speed = 5
+
+# Game loop
+running = True
+while running:
+    clock.tick(FPS)  # Batasi FPS
+
+    # Event handler
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Input (tombol panah)
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        player_x -= player_speed
+    if keys[pygame.K_RIGHT]:
+        player_x += player_speed
+    if keys[pygame.K_UP]:
+        player_y -= player_speed
+    if keys[pygame.K_DOWN]:
+        player_y += player_speed
+
+    # Gambar ulang layar
+    screen.fill(WHITE)
+    pygame.draw.rect(screen, BLUE, (player_x, player_y, player_size, player_size))
+    pygame.display.flip()
+
+# Keluar dari game
+pygame.quit()
+sys.exit()
